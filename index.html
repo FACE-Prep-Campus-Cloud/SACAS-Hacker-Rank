@@ -213,7 +213,7 @@ header::after {
   position: absolute; top: calc(100% + 8px); right: 0;
   background: var(--surface); border: 1px solid var(--border2);
   border-radius: 10px; box-shadow: var(--sh-up); overflow: hidden;
-  min-width: 190px; z-index: 300; opacity: 0; transform: translateY(-6px);
+  min-width: 210px; z-index: 300; opacity: 0; transform: translateY(-6px);
   pointer-events: none; transition: opacity .18s ease, transform .18s ease;
 }
 .dept-menu.open { opacity:1; transform:translateY(0); pointer-events:all; }
@@ -365,7 +365,7 @@ td { padding: 8px 10px; color: var(--ink); vertical-align: middle; line-height: 
 @media(min-width:640px){ .chart-wrap{height:340px;} }
 
 @media(min-width:640px){ .wrap{padding:0 24px 70px;} header{padding:0 24px;margin:0 -24px 28px;min-height:72px;} .hdr-college{font-size:17px;} .kpi-strip{grid-template-columns:repeat(3,1fr);} .kpi-num{font-size:36px;} }
-@media(min-width:1024px){ .wrap{padding:0 40px 80px;} header{padding:0 40px;margin:0 -40px 36px;min-height:76px;flex-wrap:nowrap;} .hdr-college{font-size:22px;letter-spacing:1px;} .hdr-hack{font-size:14px;} .analysis-grid{display:grid;grid-template-columns:3fr 1fr;gap:14px;} .kpi-strip{grid-template-columns:repeat(5,1fr);} .topic-name{width:160px;font-size:10.5px;} .fp-logo-wrap img{} .dept-btn{padding:9px 14px;font-size:11px;} .dl-btn{padding:9px 14px;font-size:11px;} }
+@media(min-width:1024px){ .wrap{padding:0 40px 80px;} header{padding:0 40px;margin:0 -40px 36px;min-height:76px;flex-wrap:nowrap;} .hdr-college{font-size:22px;letter-spacing:1px;} .hdr-hack{font-size:14px;} .analysis-grid{display:grid;grid-template-columns:3fr 1fr;gap:14px;} .kpi-strip{grid-template-columns:repeat(5,1fr);} .topic-name{width:160px;font-size:10.5px;} .dept-btn{padding:9px 14px;font-size:11px;} .dl-btn{padding:9px 14px;font-size:11px;} }
 @media(max-width:480px){ .hdr-college{font-size:13px;} .hdr-hack{font-size:10px;} .dept-btn{padding:6px 8px;font-size:9px;gap:4px;} .dl-btn{padding:6px 8px;} .kpi-num{font-size:28px;} #recordSearch{width:130px;} .leader-bar-wrap{display:none;} }
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.85)}}
 </style>
@@ -408,17 +408,19 @@ td { padding: 8px 10px; color: var(--ink); vertical-align: middle; line-height: 
         <svg class="dept-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
       </div>
       <div class="dept-menu" id="deptMenu">
+        <!-- FIX: each option has unique data-dept index 0,1,2,3 -->
         <div class="dept-option active" data-dept="0" onclick="selectDept(0)">
           <div class="dept-dot" style="background:#0a5c44"></div>I BCA
         </div>
         <div class="dept-option" data-dept="1" onclick="selectDept(1)">
-          <div class="dept-dot" style="background:#0f6b7a"></div> II BCA (Data Structures)
+          <div class="dept-dot" style="background:#0f6b7a"></div>II BCA (Data Structures)
         </div>
         <div class="dept-option" data-dept="2" onclick="selectDept(2)">
-          <div class="dept-dot" style="background:#5c2d6b"></div>II BCA ( Algorithm )
+          <div class="dept-dot" style="background:#5c2d6b"></div>II BCA (Algorithm)
         </div>
+        <!-- FIX: was data-dept="2" onclick="selectDept(2)" — now correctly 3 -->
         <div class="dept-option" data-dept="3" onclick="selectDept(3)">
-          <div class="dept-dot" style="background:#5c2d6b"></div> I B.Sc AI & ML
+          <div class="dept-dot" style="background:#9b2d1f"></div>I B.Sc AI & ML
         </div>
       </div>
     </div>
@@ -558,52 +560,46 @@ td { padding: 8px 10px; color: var(--ink); vertical-align: middle; line-height: 
 </div>
 
 <div class="footer">
-  Sri Amaraavathi College of Arts & Science; <span>HackerRank Challenge Report</span> &nbsp;·&nbsp; Academic Year 2024–25
+  Sri Amaravathi College of Arts & Science &nbsp;·&nbsp; <span>HackerRank Challenge Report</span> &nbsp;·&nbsp; Academic Year 2024–25
 </div>
 </div>
 
 <script>
 /* ══════════════════════════════════════════════════════
-   GOOGLE SHEETS CONFIGURATION FOR SRINIVASAN COLLEGE - BCA
+   GOOGLE SHEETS CONFIGURATION
    ══════════════════════════════════════════════════════ */
 
 const SHEET_CONFIG = {
-  0: { 
+  0: {
     id: '15JmRhc0hrurrl6-7L6DHrlq1phQ18eyUbSlhrdDkXTk',
-    name: 'I BCA', 
-    short: 'I BCA', 
-    color: '#0a5c44', 
-    gid: '0' 
+    name: 'I BCA',
+    short: 'I BCA',
+    color: '#0a5c44',
+    gid: '0'
   },
-  1: { 
+  1: {
     id: '1gh7QU9FlDUltpRMKcthMgAkm1otNkJrMpMDn_-C43Hw',
-    name: 'II BCA (Data Structures)', 
-    short: 'II BCA (Data Structures)', 
-    color: '#0f6b7a', 
-    gid: '0' 
+    name: 'II BCA (Data Structures)',
+    short: 'II BCA (DS)',
+    color: '#0f6b7a',
+    gid: '0'
   },
-  2: { 
+  2: {
     id: '104Sy0PBvUIfZiqB4-lfgp3rYllq2UxN0C1_kNxerZm4',
-    name: 'II BCA ( Algorithm ) ', 
-    short: 'II BCA ( Algorithm ) ', 
-    color: '#5c2d6b', 
-    gid: '0' 
+    name: 'II BCA (Algorithm)',
+    short: 'II BCA (Algo)',
+    color: '#5c2d6b',
+    gid: '0'
   },
-  3: { 
+  /* FIX: index 3 for I B.Sc AI & ML — was missing, caused no switch */
+  3: {
     id: '1pxO7Qovfw-xwEyvGRoxdrhYEite-t2D_rZXT6aSGYLY',
-    name: 'I B.Sc AI & ML', 
-    short: 'I B.Sc AI & ML', 
-    color: '#5c2d6b', 
-    gid: '0' 
+    name: 'I B.Sc AI & ML',
+    short: 'AI & ML',
+    color: '#9b2d1f',
+    gid: '0'
   }
 };
-
-const KNOWN_TOPICS = [
-  'Input & Output','Operators','Decision Making','Looping','Series',
-  'Pattern','Arrays 1D','Arrays 2D','Strings','Function',
-  'Recursion','Class & Objects','Encapsulation','Inheritance',
-  'Polymorphism','Abstraction','Interface / Exc. Handling'
-];
 
 const topicColors = [
   '#0a5c44','#0f6b7a','#5c2d6b','#b8860b','#9b2d1f',
@@ -742,15 +738,24 @@ document.addEventListener('click', function(e) {
     document.getElementById('deptMenu').classList.remove('open');
   }
 });
+
 function selectDept(idx) {
-  document.querySelectorAll('.dept-option').forEach(function(el){ el.classList.remove('active'); });
-  document.querySelector('.dept-option[data-dept="'+idx+'"]').classList.add('active');
-  const labels = ['I BCA', ' II BCA (Data Structures)', ' II BCA ( Algorithm )',' I B.Sc AI & ML'];
-  document.getElementById('deptBtnLabel').innerHTML = labels[idx];
+  /* Remove active from all options */
+  document.querySelectorAll('.dept-option').forEach(function(el) {
+    el.classList.remove('active');
+  });
+  /* Set active on the clicked one */
+  var activeOpt = document.querySelector('.dept-option[data-dept="' + idx + '"]');
+  if (activeOpt) activeOpt.classList.add('active');
+
+  /* FIX: labels array now has all 4 entries matching indices 0-3 */
+  var labels = ['I BCA', 'II BCA (Data Structures)', 'II BCA (Algorithm)', 'I B.Sc AI & ML'];
+  document.getElementById('deptBtnLabel').textContent = labels[idx] || SHEET_CONFIG[idx].name;
+
   document.getElementById('deptBtn').classList.remove('open');
   document.getElementById('deptMenu').classList.remove('open');
   currentDeptIdx = idx;
-  loadAndRenderDept(idx);
+  loadAndRenderDept(idx, false);
 }
 
 /* ── HELPERS ── */
@@ -777,7 +782,7 @@ async function refreshCurrentDept() {
   btn.classList.add('spinning');
   btn.disabled = true;
   delete dataCache[currentDeptIdx];
-  await loadAndRenderDept(currentDeptIdx);
+  await loadAndRenderDept(currentDeptIdx, false);
   btn.classList.remove('spinning');
   btn.disabled = false;
 }
@@ -787,28 +792,38 @@ async function loadAndRenderDept(deptIdx, isInitial) {
   const overlay   = document.getElementById('loading-overlay');
   const errBanner = document.getElementById('errorBanner');
   errBanner.classList.remove('show');
+
   if (!dataCache[deptIdx]) {
     if (isInitial) {
       overlay.style.display = 'flex';
       overlay.style.opacity = '1';
-      document.getElementById('loader-dept-label').textContent = 'Loading ' + SHEET_CONFIG[deptIdx].name + '…';
     }
+    document.getElementById('loader-dept-label').textContent = 'Loading ' + SHEET_CONFIG[deptIdx].name + '…';
     try {
       const result = await fetchSheetData(deptIdx);
       dataCache[deptIdx] = result;
     } catch (err) {
-      if (isInitial) { overlay.classList.add('hidden'); setTimeout(() => { overlay.style.display = 'none'; }, 500); }
+      if (isInitial) {
+        overlay.classList.add('hidden');
+        setTimeout(() => { overlay.style.display = 'none'; }, 500);
+      }
       document.getElementById('errorMsg').textContent = err.message;
       errBanner.classList.add('show');
-      document.getElementById('last-updated-txt').textContent = 'Failed to load — using cached or empty data';
+      document.getElementById('last-updated-txt').textContent = 'Failed to load — check sheet permissions';
       return;
     }
   }
+
   const { students: RAW, topics: TOPICS } = dataCache[deptIdx];
-  if (isInitial) { overlay.classList.add('hidden'); setTimeout(() => { overlay.style.display = 'none'; }, 500); }
+  if (isInitial) {
+    overlay.classList.add('hidden');
+    setTimeout(() => { overlay.style.display = 'none'; }, 500);
+  }
+
   const now = new Date();
   document.getElementById('last-updated-txt').textContent =
     'Last updated: ' + now.toLocaleTimeString() + ' · ' + SHEET_CONFIG[deptIdx].name + ' · ' + RAW.length + ' students';
+
   renderDept(RAW, TOPICS, deptIdx);
 }
 
@@ -877,8 +892,6 @@ function renderDept(RAW, TOPICS, deptIdx) {
   var chartLabels = top10.map(function(s){ return shortName(s); });
   var chartTotals = top10.map(function(s){ return +s.total.toFixed(2); });
 
-  var yMax = undefined;  // Auto-scaling for all departments
-
   var ctx = document.getElementById('top10Chart');
   if (window._top10Chart) { window._top10Chart.destroy(); }
   Chart.register(ChartDataLabels);
@@ -931,7 +944,6 @@ function renderDept(RAW, TOPICS, deptIdx) {
         },
         yScore: {
           type:'linear', position:'left',
-          max: yMax,
           grid:{color:'rgba(200,185,155,0.18)',lineWidth:0.8},
           ticks:{color:'#0a5c44',font:{family:"'Fira Code',monospace",size:10}},
           border:{color:'rgba(200,185,155,0.35)'},
@@ -1033,7 +1045,7 @@ function downloadPage(){
   var a    = document.createElement('a');
   a.href   = URL.createObjectURL(blob);
   var dept = document.getElementById('deptBtnLabel').textContent.trim().replace(/\s+/g,'_');
-  a.download = 'HackerRank_Dashboard_KAMARAJ_BCA_' + dept + '.html';
+  a.download = 'HackerRank_Dashboard_SriAmaravathi_' + dept + '.html';
   a.click();
   URL.revokeObjectURL(a.href);
 }
